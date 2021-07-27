@@ -1,0 +1,72 @@
+@model ApplicationCore.Models.UserDetailResponseModel
+
+@{
+    ViewData["Title"] = "User Profile";
+}
+
+<div class="container">
+    <h3>My Profile</h3>
+    <div class="row bg-light">
+        <div class="col-3 justify-content-center bg-light">
+            <div class="row mb-10">
+                <div class="col">
+                    <h4 class="text-muted">TOTAL CASH</h4>
+                    <h1 class="text-success">$@Model.TotalCash</h1>
+                </div>
+            </div>
+            <div class="card">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><i class="fas fa-id-card"></i>&nbsp;@Model.FullName</li>
+                    <li class="list-group-item"><i class="fas fa-envelope"></i>&nbsp;@Model.Email</li>
+                    <li class="list-group-item"><i class="fas fa-sign-in-alt"></i>&nbsp;@Model.JoinedOn</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col">
+            <div class="row">
+                <div class="container">
+                    <h2>My Budgets</h2>
+                    <ul class="nav nav-tabs">
+                        <li class="active nav-item mr-2"><a data-toggle="tab" href="#home">Income</a></li>
+                        <li class="nav-item ml-2"><a data-toggle="tab" href="#menu1">Expenditure</a></li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div id="home" class="tab-pane fade in active">
+                            <h6 class="mt-2 text-muted">INCOME</h6>
+                            <div class="btn-group mt-2 mb-2">
+                                <button type="button" class="btn btn-outline-secondary mr-2">
+                                    <a asp-controller="User" asp-action="AddIncome" asp-route-id="@Model.Id">
+                                        <i class="fas fa-plus"></i>&nbsp;&nbsp;TRANSACTION
+                                    </a>
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary ml-2">
+                                    <a asp-controller="income" asp-action="EditIncome" asp-route-id="@Model.Id">
+                                        <i class="fas fa-plus"></i>&nbsp;EDIT INCOMES
+                                    </a>
+                                </button>
+                            </div>
+                            <partial name="_BudgetCard" model="@Model.Incomes" />
+                        </div>
+                        <div id="menu1" class="tab-pane fade">
+                            <h6 class="mt-2 text-muted">EXPENDITURE</h6>
+                            <div class="btn-group mt-2 mb-2">
+                                <button type="button" class="btn btn-outline-secondary">
+                                    <a asp-controller="User" asp-action="AddExpenditure" asp-route-id="@Model.Id">
+                                        <i class="fas fa-plus"></i>&nbsp;&nbsp;TRANSACTION
+                                    </a>
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary ml-2">
+                                    <a asp-controller="Expenditure" asp-action="EditExpenditure" asp-route-id="@Model.Id">
+                                        <i class="fas fa-plus"></i>&nbsp;EDIT EXPENDITURES
+                                    </a>
+                                </button>
+                            </div>
+                            <partial name="_BudgetCard" model="@Model.Expands"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

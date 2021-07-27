@@ -1,0 +1,21 @@
+﻿@model List<ApplicationCore.Models.UserCardResponseModel>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container">
+    <h2>Users</h2>
+    <table class="table table-striped">
+        <tr>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>TOTAL INCOME</th>
+            <th>TOTAL EXPEND</th>
+            <th>OPERATIONS</th>
+        </tr>
+        @foreach (var user in @Model)
+        {
+             <partial name="_UserCard" model="user" />
+        }
+    </table>
+</div>

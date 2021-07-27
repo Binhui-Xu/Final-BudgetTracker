@@ -1,0 +1,19 @@
+@model ApplicationCore.Models.UserCardResponseModel
+
+<tr>
+    <td>@Model.Id</td>
+    <td>@Model.FullName</td>
+    <td>@Model.Income</td>
+    <td>@Model.Expenditure</td>
+    <td>
+        <button type="button" class="btn btn-outline-secondary mr-2">
+            <a asp-controller="User" asp-action="ViewUserProfile" asp-route-id="@Model.Id">details</a>
+        </button>
+        <button type="button" class="btn btn-outline-secondary mr-2">
+            <a asp-controller="User" asp-action="UpdateUser" asp-route-id="@Model.Id">edit</a>
+        </button>
+        <button type="button" class="btn btn-outline-secondary mr-2">
+            <a asp-controller="User" asp-action="Delete" asp-route-id="@Model.Id">delete</a>
+        </button>
+    </td>
+</tr>
