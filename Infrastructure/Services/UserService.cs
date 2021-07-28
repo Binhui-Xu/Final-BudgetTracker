@@ -84,7 +84,7 @@ namespace Infrastructure.Services
         public async Task<UserDetailResponseModel> GetUserDetails(int id)
         {
             var user = await _userRepository.GetByIdAsync(id);
-            var totalcash = (user.TotalIncomes) - (user.TotalExpends);
+            var totalcash = (user.TotalIncomes) +(user.TotalExpends);
             var userdetail = new UserDetailResponseModel
             {
                 Id = user.Id,

@@ -11,13 +11,11 @@ namespace BinhuiXu.BudgetTrackerMVC.Controllers
 {
     public class UserController : Controller
     {
-        private ICurrentUser _currentUser;
         private IUserService _userService;
         private IIncomeService _incomeService;
         private IExpenditureService _expenditureService;
-        public UserController(ICurrentUser currentUser, IUserService userService,IIncomeService incomeService,IExpenditureService expenditureService)
+        public UserController(IUserService userService,IIncomeService incomeService,IExpenditureService expenditureService)
         {
-            _currentUser = currentUser;
             _userService = userService;
             _incomeService = incomeService;
             _expenditureService = expenditureService;
