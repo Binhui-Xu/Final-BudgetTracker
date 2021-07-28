@@ -2,18 +2,19 @@
 
 <tr>
     <td>@Model.Id</td>
-    <td>@Model.FullName</td>
+    <td><a asp-controller="User" asp-action="ViewUserProfile" asp-route-id="@Model.Id">@Model.FullName</a></td>
     <td>@Model.Income</td>
     <td>@Model.Expenditure</td>
     <td>
-        <button type="button" class="btn btn-outline-secondary mr-2">
-            <a asp-controller="User" asp-action="ViewUserProfile" asp-route-id="@Model.Id">details</a>
-        </button>
-        <button type="button" class="btn btn-outline-secondary mr-2">
-            <a asp-controller="User" asp-action="UpdateUser" asp-route-id="@Model.Id">edit</a>
-        </button>
-        <button type="button" class="btn btn-outline-secondary mr-2">
-            <a asp-controller="User" asp-action="Delete" asp-route-id="@Model.Id">delete</a>
-        </button>
+        @* <button type="button" class="btn btn-outline-secondary mr-2"> *@
+        @*     <a asp-controller="User" asp-action="ViewUserProfile" asp-route-id="@Model.Id">details</a> *@
+        @* </button> *@
+        @* <button type="button" class="btn btn-outline-secondary mr-2"> *@
+        @*     <a asp-controller="User" asp-action="UpdateUser" asp-route-id="@Model.Id">edit</a> *@
+        @* </button> *@
+        @* <button type="button" class="btn btn-outline-secondary mr-2"> *@
+        @*     <a asp-controller="User" asp-action="Delete" asp-route-id="@Model.Id">delete</a> *@
+        @* </button> *@
+        <a asp-controller="User" asp-action="Delete" asp-route-id="@Model.Id"><i class="fas fa-trash-alt"></i></a>
     </td>
 </tr>

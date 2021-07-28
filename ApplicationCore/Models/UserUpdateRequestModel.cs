@@ -6,6 +6,7 @@ namespace ApplicationCore.Models
 {
     public class UserUpdateRequestModel
     {
+        [Required]
         public int Id { get; set; }
         [Required]
         [EmailAddress]

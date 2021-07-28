@@ -1,5 +1,6 @@
 @model ApplicationCore.Models.UserDetailResponseModel
-
+@using ApplicationCore.ServiceInterfaces
+@inject ICurrentUser _currentUser
 @{
     ViewData["Title"] = "User Profile";
 }
@@ -10,11 +11,18 @@
         <div class="col-3 justify-content-center bg-light">
             <div class="row mb-10">
                 <div class="col">
-                    <h4 class="text-muted">TOTAL CASH</h4>
-                    <h1 class="text-success">$@Model.TotalCash</h1>
+                    <h4 class="text-muted mt-2">TOTAL CASH</h4>
+                    @if (@Model.TotalCash>=0)
+                    {
+                        <h1 class="text-success mb-10">$@Model.TotalCash</h1>
+                    }
+                    else
+                    {
+                        <h1 class="text-danger mb-10">$@Model.TotalCash</h1>
+                    }
                 </div>
             </div>
-            <div class="card">
+            <div class="card mt-10">
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item"><i class="fas fa-id-card"></i>&nbsp;@Model.FullName</li>
                     <li class="list-group-item"><i class="fas fa-envelope"></i>&nbsp;@Model.Email</li>
@@ -34,34 +42,58 @@
                     <div class="tab-content">
                         <div id="home" class="tab-pane fade in active">
                             <h6 class="mt-2 text-muted">INCOME</h6>
-                            <div class="btn-group mt-2 mb-2">
-                                <button type="button" class="btn btn-outline-secondary mr-2">
-                                    <a asp-controller="User" asp-action="AddIncome" asp-route-id="@Model.Id">
-                                        <i class="fas fa-plus"></i>&nbsp;&nbsp;TRANSACTION
+                            @if (_currentUser.UserId==@Model.Id)
+                            {
+                                <div class="btn-group mt-2 mb-2">
+                                    <button type="button" class="btn btn-outline-secondary mr-2">
+                                        <a asp-controller="User" asp-action="AddIncome" asp-route-id="@Model.Id">
+                                            <i class="fas fa-plus"></i>&nbsp;&nbsp;TRANSACTION
+                                        </a>
+                                    </button>
+                                    <button type="button" class="btn btn-outline-secondary ml-2">
+                                        <a asp-controller="income" asp-action="EditIncome" asp-route-id="@Model.Id">
+                                            <i class="far fa-edit"></i>&nbsp;EDIT INCOMES
+                                        </a>
+                                    </button>
+                                </div>
+                            }
+                            else
+                            {
+                                <button type="button" class="btn btn-outline-secondary ml-2 mb-3">
+                                    <a asp-controller="ACCOUNT" asp-action="Login" asp-route-id="@Model.Id">
+                                        <i class="fas fa-cog"></i>&nbsp;LOGIN FOR MORE OPERATIONS
                                     </a>
                                 </button>
-                                <button type="button" class="btn btn-outline-secondary ml-2">
-                                    <a asp-controller="income" asp-action="EditIncome" asp-route-id="@Model.Id">
-                                        <i class="far fa-edit"></i>&nbsp;EDIT INCOMES
-                                    </a>
-                                </button>
-                            </div>
+                            }
+                            
                             <partial name="_BudgetCard" model="@Model.Incomes" />
                         </div>
                         <div id="menu1" class="tab-pane fade">
                             <h6 class="mt-2 text-muted">EXPENDITURE</h6>
-                            <div class="btn-group mt-2 mb-2">
-                                <button type="button" class="btn btn-outline-secondary">
-                                    <a asp-controller="User" asp-action="AddExpenditure" asp-route-id="@Model.Id">
-                                        <i class="fas fa-plus"></i>&nbsp;&nbsp;TRANSACTION
+                            @if (_currentUser.UserId==@Model.Id)
+                            {
+                                <div class="btn-group mt-2 mb-2">
+                                    <button type="button" class="btn btn-outline-secondary">
+                                        <a asp-controller="User" asp-action="AddExpenditure" asp-route-id="@Model.Id">
+                                            <i class="fas fa-plus"></i>&nbsp;&nbsp;TRANSACTION
+                                        </a>
+                                    </button>
+                                    <button type="button" class="btn btn-outline-secondary ml-2">
+                                        <a asp-controller="Expenditure" asp-action="EditExpenditure" asp-route-id="@Model.Id">
+                                            <i class="far fa-edit"></i>&nbsp;EDIT EXPENDITURES
+                                        </a>
+                                    </button>
+                                </div>
+                            }
+                            else
+                            {
+                                <button type="button" class="btn btn-outline-secondary ml-2 mb-3">
+                                    <a asp-controller="ACCOUNT" asp-action="Login" asp-route-id="@Model.Id">
+                                        <i class="fas fa-cog"></i>&nbsp;LOGIN FOR MORE OPERATIONS
                                     </a>
                                 </button>
-                                <button type="button" class="btn btn-outline-secondary ml-2">
-                                    <a asp-controller="Expenditure" asp-action="EditExpenditure" asp-route-id="@Model.Id">
-                                        <i class="far fa-edit"></i>&nbsp;EDIT EXPENDITURES
-                                    </a>
-                                </button>
-                            </div>
+                            }
+                            
                             <partial name="_BudgetCard" model="@Model.Expands"/>
                         </div>
                     </div>
